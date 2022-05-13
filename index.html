@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div id="quote"></div>
+</body>
+<script>
+  const load = async () => {
+    const response = await fetch('quotes.txt');
+    return await response.text();
+  }
+
+  const update = (list) => {
+    const quote = list[Math.floor(Math.random() * list.length)];
+    document.getElementById('quote').innerHTML = quote;
+  }
+
+  load().then(quotes => {
+    const list = quotes.split('\n');
+    update(list);
+    document.addEventListener('click', () => update(list));
+  })
+</script>
+
+</html>
